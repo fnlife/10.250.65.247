@@ -1,14 +1,25 @@
 Include /etc/ssh/sshd_config.d/*.conf
+# 2022-01-19 Dmitry Fedyuk https://www.upwork.com/fl/mage2pro
 AcceptEnv LANG LC_*
 Banner /etc/issue.net
 ChallengeResponseAuthentication no
-LoginGraceTime 60
+# http://fredericiana.com/2009/10/21/keeping-ssh-from-disconnecting-automatically
+ClientAliveCountMax 3333
+ClientAliveInterval 300
+LoginGraceTime 120
 MACs hmac-sha2-512,hmac-sha2-256
 MaxAuthTries 4
 MaxStartups 10:30:60
 PasswordAuthentication yes
-PermitRootLogin no
+PermitRootLogin yes
+PrintLastLog yes
 PrintMotd no
+PubkeyAuthentication yes
+StrictModes yes
 Subsystem	sftp	/usr/lib/openssh/sftp-server
+SyslogFacility AUTH
+TCPKeepAlive yes
 UsePAM yes
+UsePrivilegeSeparation yes
+X11DisplayOffset 10
 X11Forwarding yes
